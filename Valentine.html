@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Valentine’s Day ❤️</title>
+
+  <style>
+    :root{
+      --bg1:#ff4d8d;
+      --bg2:#ffb3c7;
+      --bg3:#fff0f6;
+      --card:#ffffffcc;
+      --text:#3a0b1e;
+      --btn:#ff2f78;
+      --btn2:#ff0f63;
+      --glow: 0 0 25px rgba(255, 47, 120, .45);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      overflow-x:hidden;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% 20%, var(--bg3), transparent 60%),
+        radial-gradient(900px 700px at 80% 10%, #ffe0ea, transparent 55%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+    }
+    a{ color: inherit; }
+
+    /* Floating hearts */
+    .heart{
+      position: fixed;
+      bottom:-40px;
+      font-size: 18px;
+      opacity:.9;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.15));
+      animation: floatUp linear forwards;
+      pointer-events:none;
+      z-index: 1;
+    }
+    @keyframes floatUp{
+      to { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+    }
+
+    .wrap{
+      position: relative;
+      z-index: 2;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 26px 16px 56px;
+    }
+
+    .top{
+      display:flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: stretch;
+      justify-content: space-between;
+    }
+
+    .titleCard{
+      flex: 1 1 520px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 22px;
+      padding: 18px 18px 14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.12);
+      backdrop-filter: blur(10px);
+    }
+
+    .titleLine{
+      margin: 2px 0 4px;
+      font-size: clamp(24px, 4vw, 44px);
+      line-height: 1.1;
+      letter-spacing: .2px;
+      text-shadow: 0 10px 25px rgba(0,0,0,.08);
+      min-height: 1.2em;
+    }
+    .sub{
+      margin: 0;
+      opacity:.9;
+      font-size: clamp(14px, 2vw, 16px);
+      min-height: 1.2em;
+    }
+
+    .pillRow{
+      margin-top: 12px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+    .pill{
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.65);
+      border: 1px solid rgba(255,255,255,.55);
+      font-weight: 700;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .controls{
+      flex: 0 1 360px;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: stretch;
+    }
+    .btn{
+      border: none;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 900;
+      cursor: pointer;
+      color: #fff;
+      background: linear-gradient(135deg, var(--btn), var(--btn2));
+      box-shadow: var(--glow);
+      transition: transform .12s ease, filter .12s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+    .btn.secondary{
+      background: rgba(255,255,255,.22);
+      color: #2b0012;
+      border: 1px solid rgba(255,255,255,.45);
+      box-shadow: 0 18px 40px rgba(0,0,0,.12);
+      backdrop-filter: blur(10px);
+    }
+
+    .grid{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 14px;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+      .controls{ flex: 1 1 320px; }
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 22px;
+      padding: 16px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.12);
+      backdrop-filter: blur(10px);
+    }
+    .card h2{ margin: 0 0 10px; font-size: 18px; }
+
+    .quote{
+      margin: 10px 0;
+      padding: 12px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(255,255,255,.5);
+    }
+    .quote b{ display:block; margin-bottom: 4px; }
+
+    .footerNote{ margin-top: 12px; opacity:.9; font-size: 13px; }
+
+    /* Countdown */
+    .countdownRow{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+      margin-top: 12px;
+    }
+    .cd{
+      flex: 1 1 110px;
+      text-align:center;
+      padding: 10px 10px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(255,255,255,.58);
+    }
+    .cd .num{ font-size: 22px; font-weight: 900; }
+    .cd .lbl{ font-size: 12px; opacity:.85; font-weight: 700; }
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .ph{
+      aspect-ratio: 1 / 1;
+      border-radius: 16px;
+      overflow:hidden;
+      background: rgba(255,255,255,.5);
+      border: 1px dashed rgba(255,255,255,.8);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 900;
+      opacity:.9;
+      position: relative;
+    }
+    .ph img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+    .ph span{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px;
+      text-align:center;
+    }
+
+    /* Modal */
+    .modalBack{
+      position: fixed;
+      inset:0;
+      background: rgba(0,0,0,.45);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index: 10;
+    }
+    .modal{
+      max-width: 780px;
+      width: 100%;
+      border-radius: 22px;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 30px 90px rgba(0,0,0,.35);
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,.65);
+      backdrop-filter: blur(12px);
+      animation: pop .18s ease;
+    }
+    @keyframes pop{ from{ transform: scale(.96); opacity:.6; } to{ transform: scale(1); opacity:1; } }
+    .modal h3{ margin: 0 0 8px; font-size: 20px; }
+    .modal p{ margin: 8px 0; line-height: 1.6; }
+    .modalActions{ display:flex; gap: 10px; justify-content:flex-end; flex-wrap: wrap; margin-top: 10px; }
+
+    /* Proposal Page */
+    .proposal{
+      display:none;
+      margin-top: 14px;
+    }
+    .proposalBox{
+      border-radius: 22px;
+      padding: 16px;
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(255,255,255,.58);
+      text-align:center;
+    }
+    .proposalBox h3{
+      margin: 0 0 8px;
+      font-size: clamp(20px, 3.4vw, 32px);
+    }
+    .proposalBtns{
+      display:flex;
+      gap: 10px;
+      justify-content:center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .btn.small{ padding: 10px 12px; border-radius: 14px; }
+
+    /* QR section */
+    .qrRow{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .inp{
+      flex: 1 1 260px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.55);
+      padding: 12px 12px;
+      outline: none;
+      font-weight: 700;
+      background: rgba(255,255,255,.6);
+    }
+    .qrBox{
+      margin-top: 12px;
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .qrCanvasWrap{
+      width: 190px;
+      height: 190px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(255,255,255,.62);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .tiny{ font-size: 12px; opacity:.85; }
+
+    /* Typewriter cursor */
+    .cursor::after{
+      content:"";
+      display:inline-block;
+      width: 10px;
+      height: 1.1em;
+      margin-left: 6px;
+      border-right: 3px solid rgba(60,0,25,.65);
+      animation: blink .9s infinite;
+      transform: translateY(2px);
+    }
+    @keyframes blink{ 50%{ opacity:0; } }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="titleCard">
+        <div class="titleLine cursor" id="twTitle"></div>
+        <p class="sub cursor" id="twSub"></p>
+
+        <!-- Countdown -->
+        <div class="countdownRow" aria-label="Countdown to Valentine's Day">
+          <div class="cd"><div class="num" id="d">--</div><div class="lbl">Days</div></div>
+          <div class="cd"><div class="num" id="h">--</div><div class="lbl">Hours</div></div>
+          <div class="cd"><div class="num" id="m">--</div><div class="lbl">Minutes</div></div>
+          <div class="cd"><div class="num" id="s">--</div><div class="lbl">Seconds</div></div>
+        </div>
+
+        <div class="pillRow">
+          <div class="pill">💞 Forever Team Us</div>
+          <div class="pill">🌹 You + Me</div>
+          <div class="pill">✨ My Favorite Person</div>
+          <div class="pill">🕯️ <span id="twLine" class="cursor"></span></div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="playBtn">▶ Play Music</button>
+        <button class="btn secondary" id="heartBtn">💗 Start Hearts</button>
+        <button class="btn" id="letterBtn">💌 Open Love Letter</button>
+        <button class="btn secondary" id="proposalToggle">💍 Open Proposal Page</button>
+        <button class="btn" id="whatsBtn">📲 Share on WhatsApp</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>💬 Love Notes</h2>
+
+        <div class="quote">
+          <b id="q1"></b>
+          <small id="q1s"></small>
+        </div>
+        <div class="quote">
+          <b id="q2"></b>
+          <small id="q2s"></small>
+        </div>
+        <div class="quote">
+          <b id="q3"></b>
+          <small id="q3s"></small>
+        </div>
+
+        <!-- Proposal Page -->
+        <div class="proposal" id="proposalSection">
+          <div class="proposalBox">
+            <h3>Will you be my Valentine, <span id="gfName2">My Love</span>? 💖</h3>
+            <div class="tiny">Choose carefully 😄</div>
+            <div class="proposalBtns">
+              <button class="btn small" id="yesBtn">YES 💘</button>
+              <button class="btn small secondary" id="noBtn">No 🙈</button>
+            </div>
+            <div style="margin-top:10px;font-weight:900;" id="proposalResult"></div>
+          </div>
+        </div>
+
+        <p class="footerNote">✨ You can personalize everything (name, date, messages) at the top of the script section.</p>
+      </div>
+
+      <div class="card">
+        <h2>📸 Our Moments</h2>
+        <div class="gallery">
+          <div class="ph"><img id="img1" alt="" /><span>Photo 1</span></div>
+          <div class="ph"><img id="img2" alt="" /><span>Photo 2</span></div>
+          <div class="ph"><img id="img3" alt="" /><span>Photo 3</span></div>
+          <div class="ph"><img id="img4" alt="" /><span>Photo 4</span></div>
+          <div class="ph"><img id="img5" alt="" /><span>Photo 5</span></div>
+          <div class="ph"><img id="img6" alt="" /><span>Photo 6</span></div>
+        </div>
+        <p class="footerNote">
+          ✅ Add photos by placing them in the same folder as this file and naming them:
+          <b>1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg, 6.jpg</b>
+        </p>
+
+        <h2 style="margin-top:16px;">🔳 QR Code (Open this site)</h2>
+        <div class="qrRow">
+          <input class="inp" id="siteUrl" placeholder="Paste your hosted link (e.g., https://your-site.com)" />
+          <button class="btn small" id="qrBtn">Generate QR</button>
+        </div>
+        <div class="qrBox">
+          <div class="qrCanvasWrap" id="qrWrap">
+            <div class="tiny" style="padding:12px;text-align:center;">
+              Paste a hosted link and click <b>Generate QR</b> ✨
+            </div>
+          </div>
+          <div class="tiny">
+            ⚠️ QR works best after you <b>host</b> this page (GitHub Pages / Netlify).<br>
+            Local file links like <b>file:///</b> usually won’t open on someone else’s phone.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Love Letter Modal -->
+  <div class="modalBack" id="modalBack">
+    <div class="modal">
+      <h3>💌 My Love Letter</h3>
+      <p id="letterText"></p>
+      <div class="modalActions">
+        <button class="btn secondary" id="closeLetter">Close</button>
+      </div>
+      <div class="tiny">P.S. Tap “Start Hearts” for extra magic ✨</div>
+    </div>
+  </div>
+
+  <!-- Music -->
+  <audio id="bgm" loop>
+    <source src="song.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- QR Library (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <script>
+    /*************** ✅ PERSONALIZE HERE ***************/
+    const GIRLFRIEND_NAME = "Akshita";     // her name
+    const YOUR_NAME = "Your Person";       // your name
+    // Valentine's date (local time): Feb 14, 2026 00:00:00
+    const VALENTINE_DATE = new Date(2026, 1, 14, 0, 0, 0);
+
+    const TYPEWRITER_TITLE = `Happy Valentine’s Day, ${GIRLFRIEND_NAME} ❤️`;
+    const TYPEWRITER_SUB   = "A tiny corner of the internet made only for you 💘";
+    const TYPEWRITER_LINE  = "I choose you — today, tomorrow, always.";
+
+    const QUOTES = [
+      { b: "“You’re my favorite feeling.”", s: "Every day is better when it starts with you." },
+      { b: "“If love had a name, it would be yours.”", s: "Thank you for making my world softer and brighter." },
+      { b: "“I’d find you in every lifetime.”", s: "And I’d choose you in every one of them." }
+    ];
+
+    const LOVE_LETTER_HTML = `
+      Hey ${GIRLFRIEND_NAME} ❤️<br><br>
+      I just want you to know… you are the best part of my day.
+      Your smile feels like home, your voice calms my chaos, and your presence makes everything lighter.<br><br>
+      This Valentine’s Day, I’m not just celebrating love — I’m celebrating <b>you</b>.<br><br>
+      Always yours,<br>
+      <b>— ${YOUR_NAME} 💖</b>
+    `;
+    /***************************************************/
+
+    // Fill simple UI text
+    document.getElementById("gfName2").textContent = GIRLFRIEND_NAME;
+    document.getElementById("letterText").innerHTML = LOVE_LETTER_HTML;
+
+    document.getElementById("q1").textContent = QUOTES[0].b;
+    document.getElementById("q1s").textContent = QUOTES[0].s;
+    document.getElementById("q2").textContent = QUOTES[1].b;
+    document.getElementById("q2s").textContent = QUOTES[1].s;
+    document.getElementById("q3").textContent = QUOTES[2].b;
+    document.getElementById("q3s").textContent = QUOTES[2].s;
+
+    // ✅ Auto-load gallery images if present
+    const imgIds = ["img1","img2","img3","img4","img5","img6"];
+    imgIds.forEach((id, i) => {
+      const img = document.getElementById(id);
+      img.src = `${i+1}.jpg`;
+      img.onload = () => img.nextElementSibling.style.display = "none";
+      img.onerror = () => {}; // keep placeholder text
+    });
+
+    // 🎶 Music controls
+    const audio = document.getElementById("bgm");
+    const playBtn = document.getElementById("playBtn");
+    let playing = false;
+
+    playBtn.addEventListener("click", async () => {
+      try{
+        if(!playing){
+          await audio.play();
+          playing = true;
+          playBtn.textContent = "⏸ Pause Music";
+        }else{
+          audio.pause();
+          playing = false;
+          playBtn.textContent = "▶ Play Music";
+        }
+      }catch(e){
+        alert("Add a file named 'song.mp3' in the same folder, then try again 💖");
+      }
+    });
+
+    // 💗 Hearts animation
+    let heartsOn = false;
+    const heartBtn = document.getElementById("heartBtn");
+    let heartInterval;
+
+    function spawnHeart(){
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = ["💖","💘","💝","💗","💓","💞","🌹"][Math.floor(Math.random()*7)];
+      const left = Math.random() * 100;
+      const dur = 4 + Math.random() * 3;
+      const size = 14 + Math.random() * 22;
+      const drift = (Math.random() * 160 - 80) + "px";
+      h.style.left = left + "vw";
+      h.style.animationDuration = dur + "s";
+      h.style.fontSize = size + "px";
+      h.style.setProperty("--drift", drift);
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), dur * 1000);
+    }
+
+    heartBtn.addEventListener("click", () => {
+      heartsOn = !heartsOn;
+      heartBtn.textContent = heartsOn ? "💗 Stop Hearts" : "💗 Start Hearts";
+      if(heartsOn){
+        spawnHeart();
+        heartInterval = setInterval(spawnHeart, 280);
+      }else{
+        clearInterval(heartInterval);
+      }
+    });
+
+    // 💌 Love letter modal
+    const modalBack = document.getElementById("modalBack");
+    document.getElementById("letterBtn").addEventListener("click", () => {
+      modalBack.style.display = "flex";
+      for(let i=0;i<14;i++) setTimeout(spawnHeart, i*70);
+    });
+    document.getElementById("closeLetter").addEventListener("click", () => modalBack.style.display = "none");
+    modalBack.addEventListener("click", (e) => { if(e.target === modalBack) modalBack.style.display = "none"; });
+
+    // ⏳ Countdown
+    const dEl = document.getElementById("d");
+    const hEl = document.getElementById("h");
+    const mEl = document.getElementById("m");
+    const sEl = document.getElementById("s");
+
+    function pad2(n){ return String(n).padStart(2, "0"); }
+
+    function tickCountdown(){
+      const now = new Date();
+      let diff = VALENTINE_DATE - now;
+
+      if(diff <= 0){
+        dEl.textContent = "00";
+        hEl.textContent = "00";
+        mEl.textContent = "00";
+        sEl.textContent = "00";
+        return;
+      }
+      const sec = Math.floor(diff / 1000);
+      const days = Math.floor(sec / 86400);
+      const hours = Math.floor((sec % 86400) / 3600);
+      const mins = Math.floor((sec % 3600) / 60);
+      const secs = sec % 60;
+
+      dEl.textContent = pad2(days);
+      hEl.textContent = pad2(hours);
+      mEl.textContent = pad2(mins);
+      sEl.textContent = pad2(secs);
+    }
+    tickCountdown();
+    setInterval(tickCountdown, 1000);
+
+    // 🖋️ Typewriter
+    function typewriter(el, text, speed=28, delay=0){
+      return new Promise(resolve => {
+        el.textContent = "";
+        let i = 0;
+        setTimeout(() => {
+          const timer = setInterval(() => {
+            el.textContent += text[i] ?? "";
+            i++;
+            if(i > text.length){
+              clearInterval(timer);
+              // remove cursor after done
+              el.classList.remove("cursor");
+              resolve();
+            }
+          }, speed);
+        }, delay);
+      });
+    }
+
+    async function runType(){
+      const t = document.getElementById("twTitle");
+      const s = document.getElementById("twSub");
+      const l = document.getElementById("twLine");
+
+      await typewriter(t, TYPEWRITER_TITLE, 26, 250);
+      await typewriter(s, TYPEWRITER_SUB, 18, 120);
+      await typewriter(l, TYPEWRITER_LINE, 16, 220);
+    }
+    runType();
+
+    // 💍 Proposal toggle + actions
+    const proposalToggle = document.getElementById("proposalToggle");
+    const proposalSection = document.getElementById("proposalSection");
+    const proposalResult = document.getElementById("proposalResult");
+    let noMoves = 0;
+
+    proposalToggle.addEventListener("click", () => {
+      const open = proposalSection.style.display === "block";
+      proposalSection.style.display = open ? "none" : "block";
+      proposalToggle.textContent = open ? "💍 Open Proposal Page" : "💍 Close Proposal Page";
+      if(!open) for(let i=0;i<10;i++) setTimeout(spawnHeart, i*80);
+    });
+
+    document.getElementById("yesBtn").addEventListener("click", () => {
+      proposalResult.textContent = `YAYYY! 💖 ${GIRLFRIEND_NAME}, you just made me the happiest 😭✨`;
+      for(let i=0;i<22;i++) setTimeout(spawnHeart, i*60);
+    });
+
+    // playful "No" behavior
+    const noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseover", () => {
+      noMoves++;
+      const dx = (Math.random()*240 - 120);
+      const dy = (Math.random()*120 - 60);
+      noBtn.style.transform = `translate(${dx}px, ${dy}px)`;
+      if(noMoves > 5){
+        noBtn.textContent = "Okay YES 😳💘";
+      }
+    });
+    noBtn.addEventListener("click", () => {
+      proposalResult.textContent = "Hehe… I’ll wait for your YES 😄💞";
+      for(let i=0;i<8;i++) setTimeout(spawnHeart, i*85);
+    });
+
+    // 🔳 QR generator
+    let qr;
+    const qrWrap = document.getElementById("qrWrap");
+    const siteUrl = document.getElementById("siteUrl");
+    const qrBtn = document.getElementById("qrBtn");
+
+    function renderQR(url){
+      qrWrap.innerHTML = "";
+      if(!url || !/^https?:\/\//i.test(url)){
+        qrWrap.innerHTML = `<div class="tiny" style="padding:12px;text-align:center;">
+          Please paste a valid link starting with <b>http://</b> or <b>https://</b> 💖
+        </div>`;
+        return;
+      }
+      // qrcodejs
+      if(typeof QRCode === "undefined"){
+        qrWrap.innerHTML = `<div class="tiny" style="padding:12px;text-align:center;">
+          QR library couldn’t load (offline).<br>
+          Connect to internet once or host this file online, then refresh ✨
+        </div>`;
+        return;
+      }
+      qr = new QRCode(qrWrap, {
+        text: url,
+        width: 170,
+        height: 170,
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+
+    qrBtn.addEventListener("click", () => renderQR(siteUrl.value.trim()));
+
+    // 📲 WhatsApp share
+    document.getElementById("whatsBtn").addEventListener("click", () => {
+      const link = siteUrl.value.trim();
+      const safeLink = /^https?:\/\//i.test(link) ? link : "";
+      const msg = `Happy Valentine’s Day ${GIRLFRIEND_NAME} ❤️\nI made this for you 💖\n${safeLink}`.trim();
+      const wa = "https://wa.me/?text=" + encodeURIComponent(msg);
+      window.open(wa, "_blank");
+      for(let i=0;i<10;i++) setTimeout(spawnHeart, i*90);
+    });
+  </script>
+</body>
+</html>

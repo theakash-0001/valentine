@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Valentine’s Day ❤️</title>
+  <title>Happy Anniversary, Akshita ❤️</title>
 
   <style>
     :root{
@@ -329,7 +329,7 @@
         <p class="sub cursor" id="twSub"></p>
 
         <!-- Countdown -->
-        <div class="countdownRow" aria-label="Countdown to Valentine's Day">
+        <div class="countdownRow" aria-label="Countdown to Our Anniversary">
           <div class="cd"><div class="num" id="d">--</div><div class="lbl">Days</div></div>
           <div class="cd"><div class="num" id="h">--</div><div class="lbl">Hours</div></div>
           <div class="cd"><div class="num" id="m">--</div><div class="lbl">Minutes</div></div>
@@ -348,14 +348,14 @@
         <button class="btn" id="playBtn">▶ Play Music</button>
         <button class="btn secondary" id="heartBtn">💗 Start Hearts</button>
         <button class="btn" id="letterBtn">💌 Open Love Letter</button>
-        <button class="btn secondary" id="proposalToggle">💍 Open Proposal Page</button>
+        <button class="btn secondary" id="proposalToggle">💍 Open Promise Page</button>
         <button class="btn" id="whatsBtn">📲 Share on WhatsApp</button>
       </div>
     </div>
 
     <div class="grid">
       <div class="card">
-        <h2>💬 Love Notes</h2>
+        <h2>💬 Anniversary Notes</h2>
 
         <div class="quote">
           <b id="q1"></b>
@@ -373,7 +373,7 @@
         <!-- Proposal Page -->
         <div class="proposal" id="proposalSection">
           <div class="proposalBox">
-            <h3>Will you be my Valentine, <span id="gfName2">My Love</span>? 💖</h3>
+            <h3>Will you celebrate forever with me, <span id="gfName2">My Love</span>? 💖</h3>
             <div class="tiny">Choose carefully 😄</div>
             <div class="proposalBtns">
               <button class="btn small" id="yesBtn">YES 💘</button>
@@ -443,26 +443,27 @@
 
   <script>
     /*************** ✅ PERSONALIZE HERE ***************/
-    const GIRLFRIEND_NAME = "Akshita";     // her name
-    const YOUR_NAME = "Your Person";       // your name
-    // Valentine's date (local time): Feb 14, 2026 00:00:00
-    const VALENTINE_DATE = new Date(2026, 1, 14, 0, 0, 0);
+    const GIRLFRIEND_NAME = "Akshita";          // her name
+    const YOUR_NAME = "Your Forever Person";    // your name/signature
+    // Anniversary date (local time): Dec 1, 2026 00:00:00
+    const ANNIVERSARY_DATE = new Date(2026, 11, 1, 0, 0, 0);
 
-    const TYPEWRITER_TITLE = `Happy Valentine’s Day, ${GIRLFRIEND_NAME} ❤️`;
-    const TYPEWRITER_SUB   = "A tiny corner of the internet made only for you 💘";
-    const TYPEWRITER_LINE  = "I choose you — today, tomorrow, always.";
+    const TYPEWRITER_TITLE = `Happy Anniversary, ${GIRLFRIEND_NAME} ❤️`;
+    const TYPEWRITER_SUB   = "A tiny corner of the internet made only for you ✨";
+    const TYPEWRITER_LINE  = "Thank you for loving me through every season.";
 
     const QUOTES = [
-      { b: "“You’re my favorite feeling.”", s: "Every day is better when it starts with you." },
-      { b: "“If love had a name, it would be yours.”", s: "Thank you for making my world softer and brighter." },
-      { b: "“I’d find you in every lifetime.”", s: "And I’d choose you in every one of them." }
+      { b: "“You’re my favorite chapter and my forever story.”", s: "Every year with you feels warmer, deeper, and more beautiful." },
+      { b: "“Home is not a place, it is you.”", s: "Thank you for turning ordinary days into precious memories." },
+      { b: "“I’d find you in every lifetime.”", s: "And I’d celebrate this love in every one of them." }
     ];
 
     const LOVE_LETTER_HTML = `
       Hey ${GIRLFRIEND_NAME} ❤️<br><br>
-      I just want you to know… you are the best part of my day.
+      I just want you to know… you are still the best part of my day.
       Your smile feels like home, your voice calms my chaos, and your presence makes everything lighter.<br><br>
-      This Valentine’s Day, I’m not just celebrating love — I’m celebrating <b>you</b>.<br><br>
+      On our anniversary, I’m not just celebrating love — I’m celebrating <b>you</b>,
+      our laughter, our growth, and every little moment we share.<br><br>
       Always yours,<br>
       <b>— ${YOUR_NAME} 💖</b>
     `;
@@ -550,7 +551,7 @@
     document.getElementById("closeLetter").addEventListener("click", () => modalBack.style.display = "none");
     modalBack.addEventListener("click", (e) => { if(e.target === modalBack) modalBack.style.display = "none"; });
 
-    // ⏳ Countdown
+    // ⏳ Countdown to anniversary
     const dEl = document.getElementById("d");
     const hEl = document.getElementById("h");
     const mEl = document.getElementById("m");
@@ -560,7 +561,7 @@
 
     function tickCountdown(){
       const now = new Date();
-      let diff = VALENTINE_DATE - now;
+      let diff = ANNIVERSARY_DATE - now;
 
       if(diff <= 0){
         dEl.textContent = "00";
@@ -623,12 +624,12 @@
     proposalToggle.addEventListener("click", () => {
       const open = proposalSection.style.display === "block";
       proposalSection.style.display = open ? "none" : "block";
-      proposalToggle.textContent = open ? "💍 Open Proposal Page" : "💍 Close Proposal Page";
+      proposalToggle.textContent = open ? "💍 Open Promise Page" : "💍 Close Promise Page";
       if(!open) for(let i=0;i<10;i++) setTimeout(spawnHeart, i*80);
     });
 
     document.getElementById("yesBtn").addEventListener("click", () => {
-      proposalResult.textContent = `YAYYY! 💖 ${GIRLFRIEND_NAME}, you just made me the happiest 😭✨`;
+      proposalResult.textContent = `YAYYY! 💖 ${GIRLFRIEND_NAME}, every year with you is my favorite gift 😭✨`;
       for(let i=0;i<22;i++) setTimeout(spawnHeart, i*60);
     });
 
@@ -684,7 +685,7 @@
     document.getElementById("whatsBtn").addEventListener("click", () => {
       const link = siteUrl.value.trim();
       const safeLink = /^https?:\/\//i.test(link) ? link : "";
-      const msg = `Happy Valentine’s Day ${GIRLFRIEND_NAME} ❤️\nI made this for you 💖\n${safeLink}`.trim();
+      const msg = `Happy Anniversary ${GIRLFRIEND_NAME} ❤️\nI made this little surprise for you 💖\n${safeLink}`.trim();
       const wa = "https://wa.me/?text=" + encodeURIComponent(msg);
       window.open(wa, "_blank");
       for(let i=0;i<10;i++) setTimeout(spawnHeart, i*90);
